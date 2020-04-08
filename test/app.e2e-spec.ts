@@ -30,4 +30,20 @@ describe('AppController (e2e)', () => {
         }
       ]);
   });
+
+  it('POST /swatches', () => {
+    return request(app.getHttpServer())
+      .post('/swatches')
+      .expect(201)
+      .expect([
+        {
+          active: true,
+          name: "My Swatch",
+          price: "$10",
+          image: "url to image",
+          color: "#467654",
+          date: '2020-04-07T22:48:00.698Z',
+        }
+      ]);
+  });
 });
