@@ -15,10 +15,19 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('GET /swatches', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/swatches')
       .expect(200)
-      .expect('Hello World!');
+      .expect([
+        {
+          active: true,
+          name: "My Swatch",
+          price: "$10",
+          image: "url to image",
+          color: "#467654",
+          date: '2020-04-07T22:48:00.698Z',
+        }
+      ]);
   });
 });
