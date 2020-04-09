@@ -9,7 +9,7 @@ describe('Swatch Controller', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [TypeOrmModule.forFeature([Swatch])],
+      imports: [TypeOrmModule.forRoot(), TypeOrmModule.forFeature([Swatch])],
       controllers: [SwatchesController],
       providers: [SwatchesService],
     }).compile();
