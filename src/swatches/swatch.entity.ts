@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
 @Entity()
 export class Swatch extends BaseEntity {
@@ -17,7 +17,7 @@ export class Swatch extends BaseEntity {
     @Column()
     color: string;
 
-    @Column()
+    @CreateDateColumn({ type: 'timestamptz' })
     date: Date;
   
     @Column()
