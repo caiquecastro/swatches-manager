@@ -9,6 +9,17 @@ describe('AppController (e2e)', () => {
   let app: INestApplication;
   let repository: Repository<Swatch>;
 
+  function createSwatch() {
+    const swatch = new Swatch();
+    swatch.name = 'My Swatch';
+    swatch.price = '$10';
+    swatch.color = 'red';
+    swatch.image = 'swatch.jpg';
+    swatch.active = true;
+
+    return repository.save(swatch);
+  }
+
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
@@ -34,14 +45,7 @@ describe('AppController (e2e)', () => {
   });
 
   it('GET /swatches/:id', async () => {
-    const swatch = new Swatch();
-    swatch.name = 'My Swatch';
-    swatch.price = '$10';
-    swatch.color = 'red';
-    swatch.image = 'swatch.jpg';
-    swatch.active = true;
-
-    await repository.save(swatch);
+    const swatch = await createSwatch();
 
     const response = await request(app.getHttpServer())
       .get(`/swatches/${swatch.id}`)
@@ -82,5 +86,32 @@ describe('AppController (e2e)', () => {
       color: '#467654',
       active: true,
     });
+  });
+
+  it('PUT /swatches/:id', async () => {
+    const swatch = await createSwatch();
+
+    const response = await request(app.getHttpServer())
+      .put(`/swatches/${swatch.id}`)
+      .send({
+        price: '$15',        
+      });
+
+    expect(response.status).toBe(200);
+    expect(response.body.price).toBe('$15');
+  });
+
+  it('DELETE /swatches/:id', async () => {
+    const swatch = await createSwatch();
+
+    const response = await request(app.getHttpServer())
+      .delete(`/swatches/${swatch.id}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toStrictEqual({});
+
+    const count = await repository.count();
+
+    expect(count).toBe(0);
   });
 });
