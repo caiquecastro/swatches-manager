@@ -14,8 +14,9 @@ describe('Swatch Controller', () => {
           type: 'postgres',
           username: 'swatches',
           password: 'swatches',
+          entities: [Swatch],
         }),
-        TypeOrmModule.forFeature([Swatch])
+        TypeOrmModule.forFeature([Swatch]),
       ],
       controllers: [SwatchesController],
       providers: [SwatchesService],
