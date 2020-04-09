@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSwatchDto } from './dto/create-swatch.dto';
-import { SwatchRepository } from './swatch.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Swatch } from './swatch.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class SwatchesService {
     constructor(
-        @InjectRepository(SwatchRepository)
-        private swatchRepository: SwatchRepository
+        @InjectRepository(Swatch)
+        private swatchRepository: Repository<Swatch>
     ) {}
 
     findAll(): Promise<Swatch[]> {
