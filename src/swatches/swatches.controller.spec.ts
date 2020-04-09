@@ -9,7 +9,12 @@ describe('Swatch Controller', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [TypeOrmModule.forRoot(), TypeOrmModule.forFeature([Swatch])],
+      imports: [
+        TypeOrmModule.forRoot({
+          type: 'postgres',
+        }),
+        TypeOrmModule.forFeature([Swatch])
+      ],
       controllers: [SwatchesController],
       providers: [SwatchesService],
     }).compile();
