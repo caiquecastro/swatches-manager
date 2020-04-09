@@ -3,6 +3,7 @@ import { CreateSwatchDto } from './dto/create-swatch.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Swatch } from './swatch.entity';
 import { Repository } from 'typeorm';
+import { UpdateSwatchDto } from './dto/update-swatch.dto';
 
 @Injectable()
 export class SwatchesService {
@@ -37,5 +38,20 @@ export class SwatchesService {
         swatch.active = true;
 
         return this.swatchRepository.save(swatch);
+    }
+
+    async update(id: number, updateSwatchDto: UpdateSwatchDto): Promise<Swatch> {
+        const { price } = updateSwatchDto;
+
+        const swatch = await this.findOne(id);
+        swatch.price = price;
+
+        return this.swatchRepository.save(swatch);
+    }
+
+    async remove(id: number): Promise<void> {
+        const swatch = await this.findOne(id);
+
+        await this.swatchRepository.remove(swatch);
     }
 }
