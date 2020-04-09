@@ -36,3 +36,4 @@ jobs:
         yarn test:e2e
       env:
         DB_USER: swatches
+        DB_PASSWORD: swatches
