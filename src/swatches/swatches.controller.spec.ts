@@ -12,6 +12,8 @@ describe('Swatch Controller', () => {
       imports: [
         TypeOrmModule.forRoot({
           type: 'postgres',
+          username: 'swatches',
+          password: 'swatches',
         }),
         TypeOrmModule.forFeature([Swatch])
       ],
