@@ -1,22 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { Swatch } from './interfaces/swatch.interface';
+import { CreateSwatchDto } from './dto/create-swatch.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Swatch } from './swatch.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class SwatchesService {
-    private readonly swatches = [
-        {
-            active: true,
-            name: 'My Swatch',
-            price: '$10',
-            image: 'url to image',
-            color: '#467654',
-            date: new Date('2020-04-07T22:48:00.698Z'),
-        },
-    ];
+    constructor(
+        @InjectRepository(Swatch)
+        private swatchRepository: Repository<Swatch>
+    ) {}
 
     findAll(): Promise<Swatch[]> {
-        return new Promise((resolve) => {
-            resolve(this.swatches);
-        });
+        return this.swatchRepository.find();
+    }
+
+    create(createSwatchDto: CreateSwatchDto): Promise<Swatch> {
+        const { name, price, image, color } = createSwatchDto;
+
+        const swatch = new Swatch();
+        swatch.name = name;
+        swatch.price = price;
+        swatch.image = image;
+        swatch.color = color;
+        swatch.date = new Date();
+        swatch.active = true;
+
+        return this.swatchRepository.save(swatch);
     }
 }
