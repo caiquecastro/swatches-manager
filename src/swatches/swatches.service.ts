@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSwatchDto } from './dto/create-swatch.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Swatch } from './swatch.entity';
@@ -13,6 +13,16 @@ export class SwatchesService {
 
     findAll(): Promise<Swatch[]> {
         return this.swatchRepository.find();
+    }
+
+    async findOne(id: number): Promise<Swatch> {
+        const swatch = await this.swatchRepository.findOne(id);
+
+        if (!swatch) {
+            throw new NotFoundException('Could not found swatch');
+        }
+
+        return swatch;
     }
 
     create(createSwatchDto: CreateSwatchDto): Promise<Swatch> {

@@ -26,6 +26,17 @@ describe('AppController (e2e)', () => {
       .expect([]);
   });
 
+  it('GET /swatches/1', () => {
+    return request(app.getHttpServer())
+      .get('/swatches/1')
+      .expect(404)
+      .expect({
+        statusCode: 404,
+        message: 'Could not found swatch',
+        error: 'Not Found',
+      });
+  });
+
   it('POST /swatches', () => {
     return request(app.getHttpServer())
       .post('/swatches')
@@ -34,7 +45,6 @@ describe('AppController (e2e)', () => {
         price: '$10',
         image: 'url to image',
         color: '#467654',
-        date: new Date('2020-04-08T12:00:00.000Z'),
       })
       .expect(201)
       .then(function end(response) {
