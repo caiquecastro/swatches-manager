@@ -1,6 +1,15 @@
+import { IsNotEmpty } from 'class-validator';
+
 export class CreateSwatchDto {
-    name: string;
-    price: string;
-    image: string;
-    color: string;
+  @IsNotEmpty()
+  name: string;
+
+  @IsNotEmpty()
+  price: string;
+
+  @IsNotEmpty()
+  image: string;
+
+  @IsNotEmpty()
+  color: string;
 }

@@ -7,51 +7,51 @@ import { UpdateSwatchDto } from './dto/update-swatch.dto';
 
 @Injectable()
 export class SwatchesService {
-    constructor(
-        @InjectRepository(Swatch)
-        private swatchRepository: Repository<Swatch>
-    ) {}
+  constructor(
+    @InjectRepository(Swatch)
+    private swatchRepository: Repository<Swatch>,
+  ) {}
 
-    findAll(): Promise<Swatch[]> {
-        return this.swatchRepository.find();
+  findAll(): Promise<Swatch[]> {
+    return this.swatchRepository.find();
+  }
+
+  async findOne(id: number): Promise<Swatch> {
+    const swatch = await this.swatchRepository.findOne(id);
+
+    if (!swatch) {
+      throw new NotFoundException('Could not found swatch');
     }
 
-    async findOne(id: number): Promise<Swatch> {
-        const swatch = await this.swatchRepository.findOne(id);
+    return swatch;
+  }
 
-        if (!swatch) {
-            throw new NotFoundException('Could not found swatch');
-        }
+  create(createSwatchDto: CreateSwatchDto): Promise<Swatch> {
+    const { name, price, image, color } = createSwatchDto;
 
-        return swatch;
-    }
+    const swatch = new Swatch();
+    swatch.name = name;
+    swatch.price = price;
+    swatch.image = image;
+    swatch.color = color;
+    swatch.date = new Date();
+    swatch.active = true;
 
-    create(createSwatchDto: CreateSwatchDto): Promise<Swatch> {
-        const { name, price, image, color } = createSwatchDto;
+    return this.swatchRepository.save(swatch);
+  }
 
-        const swatch = new Swatch();
-        swatch.name = name;
-        swatch.price = price;
-        swatch.image = image;
-        swatch.color = color;
-        swatch.date = new Date();
-        swatch.active = true;
+  async update(id: number, updateSwatchDto: UpdateSwatchDto): Promise<Swatch> {
+    const { price } = updateSwatchDto;
 
-        return this.swatchRepository.save(swatch);
-    }
+    const swatch = await this.findOne(id);
+    swatch.price = price;
 
-    async update(id: number, updateSwatchDto: UpdateSwatchDto): Promise<Swatch> {
-        const { price } = updateSwatchDto;
+    return this.swatchRepository.save(swatch);
+  }
 
-        const swatch = await this.findOne(id);
-        swatch.price = price;
+  async remove(id: number): Promise<void> {
+    const swatch = await this.findOne(id);
 
-        return this.swatchRepository.save(swatch);
-    }
-
-    async remove(id: number): Promise<void> {
-        const swatch = await this.findOne(id);
-
-        await this.swatchRepository.remove(swatch);
-    }
+    await this.swatchRepository.remove(swatch);
+  }
 }
