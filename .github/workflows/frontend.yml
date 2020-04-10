@@ -33,4 +33,4 @@ jobs:
         # yarn test:e2e
         yarn build
     - name: Deploy static site to S3 bucket
-      run: aws s3 sync ./dist/ ${{ secrets.AWS_S3_BUCKET_URL }} --delete
+      run: aws s3 sync ./frontend/dist/ ${{ secrets.AWS_S3_BUCKET_URL }} --delete
