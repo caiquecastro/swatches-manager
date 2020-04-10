@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import ky from "ky";
+import api from "@/api";
 
 export default {
   data() {
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     async saveForm() {
-      await ky.post("/api/swatches", { json: this.form }).json();
+      await api.post("swatches", { json: this.form }).json();
 
       this.$router.push("/swatches");
     }
