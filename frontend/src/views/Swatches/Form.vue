@@ -7,7 +7,13 @@
     <form action="/swatches" @submit.prevent="saveForm" method="POST">
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" v-model="form.name" />
+        <input
+          id="name"
+          type="text"
+          class="form-control"
+          v-model="form.name"
+          required
+        />
       </div>
 
       <div class="form-group">
@@ -17,6 +23,7 @@
           type="text"
           class="form-control"
           v-model="form.price"
+          required
         />
       </div>
 
@@ -27,16 +34,18 @@
           type="text"
           class="form-control"
           v-model="form.image"
+          required
         />
       </div>
 
       <div class="form-group">
         <label for="color">Color</label>
         <input
-          type="text"
+          type="color"
           class="form-control"
           id="color"
           v-model="form.color"
+          required
         />
       </div>
 
@@ -46,7 +55,7 @@
 </template>
 
 <script>
-import api from "@/api";
+import Api from "@/api";
 import { getErrorMessage } from "@/utils";
 import ErrorDisplay from "@/components/ErrorDisplay";
 
@@ -68,7 +77,7 @@ export default {
   methods: {
     async saveForm() {
       try {
-        await api.post("swatches", { json: this.form }).json();
+        await Api.create(this.form);
 
         this.$router.push("/swatches");
       } catch (err) {
