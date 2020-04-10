@@ -47,9 +47,10 @@ describe('AppController (e2e)', () => {
   it('GET /swatches/:id', async () => {
     const swatch = await createSwatch();
 
-    const response = await request(app.getHttpServer())
-      .get(`/swatches/${swatch.id}`)
-    
+    const response = await request(app.getHttpServer()).get(
+      `/swatches/${swatch.id}`,
+    );
+
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({
       name: 'My Swatch',
@@ -57,9 +58,8 @@ describe('AppController (e2e)', () => {
   });
 
   it('GET /swatches/999999', async () => {
-    const response = await request(app.getHttpServer())
-      .get('/swatches/999999')
-    
+    const response = await request(app.getHttpServer()).get('/swatches/999999');
+
     expect(response.status).toBe(404);
     expect(response.body).toMatchObject({
       error: 'Not Found',
@@ -77,7 +77,7 @@ describe('AppController (e2e)', () => {
         image: 'url to image',
         color: '#467654',
       });
-    
+
     expect(response.status).toBe(201);
     expect(response.body).toMatchObject({
       name: 'My Swatch',
@@ -97,14 +97,12 @@ describe('AppController (e2e)', () => {
         image: 'url to image',
         color: '#467654',
       });
-    
+
     expect(response.status).toBe(400);
     expect(response.body).toMatchObject({
       error: 'Bad Request',
       statusCode: 400,
-      message: [
-        'name should not be empty',
-      ],
+      message: ['name should not be empty'],
     });
   });
 
@@ -114,7 +112,7 @@ describe('AppController (e2e)', () => {
     const response = await request(app.getHttpServer())
       .put(`/swatches/${swatch.id}`)
       .send({
-        price: '$15',        
+        price: '$15',
       });
 
     expect(response.status).toBe(200);
@@ -124,8 +122,9 @@ describe('AppController (e2e)', () => {
   it('DELETE /swatches/:id', async () => {
     const swatch = await createSwatch();
 
-    const response = await request(app.getHttpServer())
-      .delete(`/swatches/${swatch.id}`);
+    const response = await request(app.getHttpServer()).delete(
+      `/swatches/${swatch.id}`,
+    );
 
     expect(response.status).toBe(200);
     expect(response.body).toStrictEqual({});

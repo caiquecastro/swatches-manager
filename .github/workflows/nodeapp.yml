@@ -29,8 +29,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install npm dependencies
+      working-directory: backend
       run: yarn
     - name: Run tests
+      working-directory: backend
       run: |
         yarn test
         yarn test:e2e

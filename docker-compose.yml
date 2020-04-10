@@ -9,10 +9,10 @@ services:
             POSTGRES_USER: swatches
             POSTGRES_PASSWORD: rauxa-swatches
     app:
-        build: .
+        build: ./backend
         command: npm run start:dev
         volumes:
-            - .:/usr/src/app
+            - ./backend:/usr/src/app
         ports:
             - 3000:3000
         environment:
