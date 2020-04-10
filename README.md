@@ -1,5 +1,9 @@
 # Rauxa Services Engineering Code Challenge
 
+## Hosted Application
+
+http://rauxa-swatches.s3-website-us-east-1.amazonaws.com/
+
 ## Installation
 
 ```bash
