@@ -4,10 +4,7 @@ import { SwatchesModule } from './swatches/swatches.module';
 import { typeOrmConfig } from './config/typeorm.config';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(typeOrmConfig),
-    SwatchesModule,
-  ],
+  imports: [TypeOrmModule.forRoot(typeOrmConfig), SwatchesModule],
   controllers: [],
   providers: [],
 })

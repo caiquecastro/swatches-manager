@@ -88,6 +88,26 @@ describe('AppController (e2e)', () => {
     });
   });
 
+  it('POST /swatches requires name', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/swatches')
+      .send({
+        name: '',
+        price: '$10',
+        image: 'url to image',
+        color: '#467654',
+      });
+    
+    expect(response.status).toBe(400);
+    expect(response.body).toMatchObject({
+      error: 'Bad Request',
+      statusCode: 400,
+      message: [
+        'name should not be empty',
+      ],
+    });
+  });
+
   it('PUT /swatches/:id', async () => {
     const swatch = await createSwatch();
 

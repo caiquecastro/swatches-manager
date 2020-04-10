@@ -1,6 +1,6 @@
 export class UpdateSwatchDto {
-    name: string;
-    price: string;
-    image: string;
-    color: string;
+  name: string;
+  price: string;
+  image: string;
+  color: string;
 }
