@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ky from "ky";
+import api from "@/api";
 import SwatchCard from "@/components/Card";
 
 export default {
@@ -19,7 +19,7 @@ export default {
     SwatchCard
   },
   async created() {
-    const data = await ky.get("/api/swatches").json();
+    const data = await api.get("swatches").json();
     this.swatches = data;
   },
   data() {
