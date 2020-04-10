@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import api from "@/api";
+import Api from "@/api";
 import { getErrorMessage } from "@/utils";
 import LoadingSpin from "@/components/LoadingSpin";
 import ErrorDisplay from "@/components/ErrorDisplay";
@@ -52,7 +52,7 @@ export default {
   async created() {
     try {
       this.isLoading = true;
-      const data = await api.get(`swatches/${this.id}`).json();
+      const data = await Api.findOne(this.id);
       this.swatch = data;
     } catch (err) {
       this.error = getErrorMessage(err);

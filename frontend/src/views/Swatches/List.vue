@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import api from "@/api";
+import Api from "@/api";
 import { getErrorMessage } from "@/utils";
 import SwatchCard from "@/components/Card";
 import LoadingSpin from "@/components/LoadingSpin";
@@ -36,8 +36,9 @@ export default {
   async created() {
     try {
       this.isLoading = true;
-      const data = await api.get("swatches").json();
-      this.swatches = data;
+
+      const swatches = await Api.findAll();
+      this.swatches = swatches;
     } catch (err) {
       this.error = getErrorMessage(err);
     } finally {
