@@ -2,6 +2,8 @@
   <div>
     <h1>New Swatch</h1>
 
+    <error-display :error="error" />
+
     <form action="/swatches" @submit.prevent="saveForm" method="POST">
       <div class="form-group">
         <label for="name">Name</label>
@@ -45,10 +47,16 @@
 
 <script>
 import api from "@/api";
+import { getErrorMessage } from "@/utils";
+import ErrorDisplay from "@/components/ErrorDisplay";
 
 export default {
+  components: {
+    ErrorDisplay
+  },
   data() {
     return {
+      error: null,
       form: {
         name: "",
         price: "",
@@ -59,9 +67,13 @@ export default {
   },
   methods: {
     async saveForm() {
-      await api.post("swatches", { json: this.form }).json();
+      try {
+        await api.post("swatches", { json: this.form }).json();
 
-      this.$router.push("/swatches");
+        this.$router.push("/swatches");
+      } catch (err) {
+        this.error = getErrorMessage(err);
+      }
     }
   }
 };
