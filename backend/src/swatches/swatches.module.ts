@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SwatchesController } from './swatches.controller';
 import { SwatchesService } from './swatches.service';
-import { SwatchRepository } from './swatch.repository';
+import { Swatch } from './swatch.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([SwatchRepository])],
+  imports: [TypeOrmModule.forFeature([Swatch])],
   controllers: [SwatchesController],
   providers: [SwatchesService],
 })
