@@ -10,9 +10,16 @@ http://rauxa-swatches.s3-website-us-east-1.amazonaws.com/
 $ npm install
 ```
 
-## Running the app
+## Running the backend app
+
+Using docker (Recommended way):
+
+```
+$ docker-compose up -d
+```
 
 ```bash
+$ cd backend
 # development
 $ npm run start
 
@@ -23,9 +30,11 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Testing the backend app
 
 ```bash
+$ cd backend
+
 # unit tests
 $ npm run test
 
@@ -38,4 +47,9 @@ $ npm run test:cov
 
 ## Tech Stack
 
-This application was prodly made with [NestJS](http://nestjs.com/).
+* The code is hosted on Github using Github Actions as CI and CD.
+* This application was prodly made with [NestJS](http://nestjs.com/).
+* This application front-end was developed with VueJs [Vue.js](https://vuejs.org/).
+* The frontend application was hosted on AWS S3.
+* The backend application was hosted on AWS EC2.
+* The database uses AWS RDS managed database.
