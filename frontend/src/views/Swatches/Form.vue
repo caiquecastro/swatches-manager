@@ -16,17 +16,6 @@
       </div>
 
       <div class="form-group">
-        <label for="image">Image</label>
-        <input
-          id="image"
-          type="text"
-          class="form-control"
-          v-model="form.image"
-          required
-        />
-      </div>
-
-      <div class="form-group">
         <label for="color">Color</label>
         <input
           type="color"
@@ -35,6 +24,11 @@
           v-model="form.color"
           required
         />
+      </div>
+
+      <div class="form-group">
+        <label for="image">Image</label>
+        <file-field id="image" v-model="form.image" />
       </div>
 
       <button class="btn btn-primary">Save</button>
@@ -46,10 +40,12 @@
 import Api from "@/api";
 import { getErrorMessage } from "@/utils";
 import SwatchForm from "@/forms/SwatchForm";
+import FileField from "@/components/FileField";
 import ErrorDisplay from "@/components/ErrorDisplay";
 
 export default {
   components: {
+    FileField,
     ErrorDisplay
   },
   props: {
