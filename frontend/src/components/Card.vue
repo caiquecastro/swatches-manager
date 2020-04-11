@@ -11,13 +11,16 @@
         Color: {{ swatch.color }} <br />
         Price: {{ swatch.price }}
       </p>
-      <router-link :to="`/swatches/${swatch.id}`" class="btn btn-primary">
+      <router-link
+        :to="`/swatches/${swatch.id}`"
+        class="btn btn-primary btn-sm"
+      >
         Details
       </router-link>
 
       <button
         type="button"
-        class="btn ml-2"
+        class="btn btn-sm ml-2"
         :class="statusButtonClass"
         @click="$emit('toggleActive')"
       >

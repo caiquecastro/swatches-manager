@@ -5,24 +5,20 @@
     <loading-spin :visible="isLoading" />
     <error-display :error="error" />
 
-    <div class="row">
-      <div class="col-4" v-for="swatch in swatches" :key="swatch.id">
-        <swatch-card :swatch="swatch" @toggleActive="toggleActive(swatch)" />
-      </div>
-    </div>
+    <card-grid :swatches="swatches" />
   </div>
 </template>
 
 <script>
 import Api from "@/api";
 import { getErrorMessage } from "@/utils";
-import SwatchCard from "@/components/Card";
+import CardGrid from "@/components/CardGrid";
 import LoadingSpin from "@/components/LoadingSpin";
 import ErrorDisplay from "@/components/ErrorDisplay";
 
 export default {
   components: {
-    SwatchCard,
+    CardGrid,
     LoadingSpin,
     ErrorDisplay
   },
