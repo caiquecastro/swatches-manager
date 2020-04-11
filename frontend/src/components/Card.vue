@@ -17,10 +17,11 @@
 
       <button
         type="button"
-        class="btn btn-warning ml-2"
+        class="btn ml-2"
+        :class="statusButtonClass"
         @click="$emit('toggleActive')"
       >
-        {{ swatch.active ? "Activate" : "Deactivate" }}
+        {{ swatch.active ? "Deactivate" : "Activate" }}
       </button>
     </div>
   </div>
@@ -30,6 +31,11 @@
 export default {
   props: {
     swatch: {}
+  },
+  computed: {
+    statusButtonClass() {
+      return this.swatch.active ? "btn-warning" : "btn-success";
+    }
   }
 };
 </script>
