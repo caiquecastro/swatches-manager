@@ -13,9 +13,14 @@ export default class Api {
     return client.get(`swatches/${id}`).json();
   }
 
-  static async create(attributes) {
+  static async save(payload) {
+    const { id, ...attributes } = payload;
+
+    const url = id ? `swatches/${id}` : "swatches";
+    const method = id ? "put" : "post";
+
     try {
-      await client.post("swatches", { json: attributes });
+      await client[method](url, { json: attributes });
     } catch (err) {
       if (!err.response) {
         throw err;
@@ -23,7 +28,7 @@ export default class Api {
 
       const errorResponse = await err.response.json();
 
-      if (errorResponse.message) {
+      if (Array.isArray(errorResponse.message)) {
         throw new Error(errorResponse.message.join(", "));
       }
 

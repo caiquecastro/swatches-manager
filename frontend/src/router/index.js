@@ -25,6 +25,13 @@ const routes = [
     props: true,
     component: () =>
       import(/* webpackChunkName: "swatches" */ "../views/Swatches/Details.vue")
+  },
+  {
+    path: "/swatches/:id/edit",
+    name: "EditSwatch",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "swatches" */ "../views/Swatches/Form.vue")
   }
 ];
 

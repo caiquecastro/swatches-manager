@@ -5,7 +5,7 @@
       v-for="swatch in swatches"
       class="col-12 col-md-4 col-lg-3"
     >
-      <swatch-card :swatch="swatch" @toggleActive="toggleActive(swatch)" />
+      <swatch-card :swatch="swatch" />
     </div>
   </div>
 </template>

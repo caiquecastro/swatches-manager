@@ -23,6 +23,8 @@
           <dt>Active</dt>
           <dd>{{ swatch.active }}</dd>
         </dl>
+
+        <router-link :to="`/swatches/${id}/edit`">Edit</router-link>
       </div>
     </div>
   </div>
