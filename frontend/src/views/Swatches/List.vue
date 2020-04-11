@@ -7,7 +7,10 @@
 
     <div class="row">
       <div class="col-4" v-for="swatch in swatches" :key="swatch.id">
-        <swatch-card :swatch="swatch" />
+        <swatch-card
+          :swatch="swatch"
+          @toggleActive="toggleActive(swatch)"
+        />
       </div>
     </div>
   </div>
@@ -43,6 +46,11 @@ export default {
       this.error = getErrorMessage(err);
     } finally {
       this.isLoading = false;
+    }
+  },
+  methods: {
+    async toggleActive(swatch) {
+      await Api.toggleStatus(swatch);
     }
   }
 };

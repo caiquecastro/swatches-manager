@@ -41,10 +41,12 @@ export class SwatchesService {
   }
 
   async update(id: number, updateSwatchDto: UpdateSwatchDto): Promise<Swatch> {
-    const { price } = updateSwatchDto;
+    const { price, image, active } = updateSwatchDto;
 
     const swatch = await this.findOne(id);
     swatch.price = price;
+    swatch.image = image;
+    swatch.active = active;
 
     return this.swatchRepository.save(swatch);
   }

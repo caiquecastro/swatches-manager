@@ -14,6 +14,14 @@
       <router-link :to="`/swatches/${swatch.id}`" class="btn btn-primary">
         Details
       </router-link>
+
+      <button
+        type="button"
+        class="btn btn-warning ml-2"
+        @click="$emit('toggleActive')"
+      >
+        {{ swatch.active ? "Activate" : "Deactivate" }}
+      </button>
     </div>
   </div>
 </template>

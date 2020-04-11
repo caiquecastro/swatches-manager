@@ -3,4 +3,5 @@ export class UpdateSwatchDto {
   price: string;
   image: string;
   color: string;
+  active: boolean;
 }
