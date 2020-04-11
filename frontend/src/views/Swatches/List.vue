@@ -7,10 +7,7 @@
 
     <div class="row">
       <div class="col-4" v-for="swatch in swatches" :key="swatch.id">
-        <swatch-card
-          :swatch="swatch"
-          @toggleActive="toggleActive(swatch)"
-        />
+        <swatch-card :swatch="swatch" @toggleActive="toggleActive(swatch)" />
       </div>
     </div>
   </div>
@@ -36,21 +33,27 @@ export default {
       swatches: []
     };
   },
-  async created() {
-    try {
-      this.isLoading = true;
-
-      const swatches = await Api.findAll();
-      this.swatches = swatches;
-    } catch (err) {
-      this.error = getErrorMessage(err);
-    } finally {
-      this.isLoading = false;
-    }
+  created() {
+    return this.fetchList();
   },
   methods: {
+    async fetchList() {
+      try {
+        this.swatches = [];
+        this.isLoading = true;
+
+        const swatches = await Api.findAll();
+        this.swatches = swatches;
+      } catch (err) {
+        this.error = getErrorMessage(err);
+      } finally {
+        this.isLoading = false;
+      }
+    },
     async toggleActive(swatch) {
       await Api.toggleStatus(swatch);
+
+      this.fetchList();
     }
   }
 };

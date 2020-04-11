@@ -83,6 +83,8 @@ allowing code reusability.
 
 ## Todo
 
+* Enable multiple images for swatches
+* Improve UI and UX
 * Implement CD for backend
 * Check if frontend is fully responsive
 * More testing (Unit tests, improve coverage)
