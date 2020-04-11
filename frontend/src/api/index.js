@@ -30,4 +30,13 @@ export default class Api {
       throw err;
     }
   }
+
+  static toggleStatus(swatch) {
+    const json = {
+      ...swatch,
+      active: !swatch.active
+    };
+
+    return client.put(`swatches/${swatch.id}`, { json });
+  }
 }
