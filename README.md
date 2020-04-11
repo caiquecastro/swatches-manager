@@ -88,6 +88,8 @@ allowing code reusability.
 * Implement CD for backend
 * Check if frontend is fully responsive
 * More testing (Unit tests, improve coverage)
+* Optimize CI jobs
+* Authentication and Authorization if required
 
 ## Author
 

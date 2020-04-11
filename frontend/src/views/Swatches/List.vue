@@ -45,11 +45,6 @@ export default {
       } finally {
         this.isLoading = false;
       }
-    },
-    async toggleActive(swatch) {
-      await Api.toggleStatus(swatch);
-
-      this.fetchList();
     }
   }
 };

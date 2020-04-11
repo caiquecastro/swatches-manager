@@ -8,8 +8,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ swatch.name }}</h5>
       <p class="card-text">
-        Color: {{ swatch.color }} <br />
-        Price: {{ swatch.price }}
+        <status-bullet :status="swatch.active" />
       </p>
       <router-link
         :to="`/swatches/${swatch.id}`"
@@ -17,21 +16,17 @@
       >
         Details
       </router-link>
-
-      <button
-        type="button"
-        class="btn btn-sm ml-2"
-        :class="statusButtonClass"
-        @click="$emit('toggleActive')"
-      >
-        {{ swatch.active ? "Deactivate" : "Activate" }}
-      </button>
     </div>
   </div>
 </template>
 
 <script>
+import StatusBullet from "@/components/StatusBullet";
+
 export default {
+  components: {
+    StatusBullet
+  },
   props: {
     swatch: {}
   },

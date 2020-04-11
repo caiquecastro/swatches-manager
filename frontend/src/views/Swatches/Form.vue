@@ -1,30 +1,18 @@
 <template>
   <div>
-    <h1>New Swatch</h1>
+    <h1>{{ id ? "Edit Swatch" : "New Swatch" }}</h1>
 
     <error-display :error="error" />
 
     <form action="/swatches" @submit.prevent="saveForm" method="POST">
       <div class="form-group">
         <label for="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          class="form-control"
-          v-model="form.name"
-          required
-        />
+        <input id="name" class="form-control" v-model="form.name" required />
       </div>
 
       <div class="form-group">
         <label for="price">Price</label>
-        <input
-          id="price"
-          type="text"
-          class="form-control"
-          v-model="form.price"
-          required
-        />
+        <input id="price" class="form-control" v-model="form.price" required />
       </div>
 
       <div class="form-group">
@@ -57,32 +45,52 @@
 <script>
 import Api from "@/api";
 import { getErrorMessage } from "@/utils";
+import SwatchForm from "@/forms/SwatchForm";
 import ErrorDisplay from "@/components/ErrorDisplay";
 
 export default {
   components: {
     ErrorDisplay
   },
+  props: {
+    id: {}
+  },
   data() {
     return {
       error: null,
-      form: {
-        name: "",
-        price: "",
-        image: "",
-        color: ""
-      }
+      form: new SwatchForm()
     };
   },
   methods: {
+    async loadForm() {
+      if (!this.id) {
+        return this.form.reset();
+      }
+
+      try {
+        this.isLoading = true;
+        const data = await Api.findOne(this.id);
+        this.form.load(data);
+      } catch (err) {
+        this.error = getErrorMessage(err);
+      } finally {
+        this.isLoading = false;
+      }
+    },
     async saveForm() {
       try {
-        await Api.create(this.form);
+        await Api.save(this.form);
 
         this.$router.push("/swatches");
       } catch (err) {
         this.error = getErrorMessage(err);
       }
+    }
+  },
+  watch: {
+    id: {
+      immediate: true,
+      handler: "loadForm"
     }
   }
 };
