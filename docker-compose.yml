@@ -7,7 +7,7 @@ services:
             - 5432:5432
         environment:
             POSTGRES_USER: swatches
-            POSTGRES_PASSWORD: rauxa-swatches
+            POSTGRES_PASSWORD: swatches
     app:
         build: ./backend
         command: npm run start:dev
@@ -18,4 +18,13 @@ services:
         environment:
             DB_HOST: postgres
             DB_USER: swatches
-            DB_PASSWORD: rauxa-swatches
+            DB_PASSWORD: swatches
+
+    frontend:
+        image: node
+        command: yarn serve
+        working_dir: /usr/src/app
+        volumes:
+            - ./frontend:/usr/src/app
+        ports:
+            - 8080:8080
