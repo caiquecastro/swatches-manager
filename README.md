@@ -37,31 +37,44 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Testing the backend app
+## Testing the app
 
 Using docker (Recommended way):
 
 ```
-# E2E Tests
+# Unit Tests
 $ docker-compose run app yarn test
 
 # E2E Tests
 $ docker-compose run app yarn test:e2e
 ```
 
-Running locally:
+Running backend locally (requires local postgres database server):
 
 ```bash
 $ cd backend
 
+$ yarn install
+
 # unit tests
-$ npm run test
+$ yarn test
 
 # e2e tests
-$ npm run test:e2e
+$ yarn test:e2e
 
 # test coverage
-$ npm run test:cov
+$ yarn test:cov
+```
+
+Running frontend locally:
+
+```bash
+$ cd frontend
+
+$ yarn install
+
+# unit tests
+$ yarn serve
 ```
 
 ## Tech Stack
@@ -84,10 +97,12 @@ allowing code reusability.
 ## Todo
 
 * Enable multiple images for swatches
+* Save image on S3
+* Upload 2 versions of image (large/original and thumbnail)
 * Improve UI and UX
 * Implement CD for backend
 * Check if frontend is fully responsive
-* More testing (Unit tests, improve coverage)
+* More tests (Unit tests, improve coverage)
 * Optimize CI jobs
 * Authentication and Authorization if required
 
