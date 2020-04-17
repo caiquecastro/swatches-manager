@@ -26,4 +26,23 @@ describe('SwatchesService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('should update swatch', async () => {
+    const swatch = await service.create({
+      name: 'Old name',
+      price: '10',
+      image: 'foo.jpg',
+      color: '#000',
+    });
+    
+    const updatedSwatch = await service.update(swatch.id, {
+      name: 'New name',
+      price: '10',
+      image: 'foo.jpg',
+      color: '#000',
+      active: true,
+    });
+
+    expect(updatedSwatch.name).toBe('New name');
+  });
 });
