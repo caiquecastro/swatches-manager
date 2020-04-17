@@ -15,6 +15,7 @@ describe('SwatchesService', () => {
           username: 'swatches',
           password: 'swatches',
           entities: [Swatch],
+          synchronize: true,
         }),
         TypeOrmModule.forFeature([Swatch]),
       ],
