@@ -6,7 +6,7 @@ import { Swatch } from './swatch.entity';
 describe('SwatchesService', () => {
   let service: SwatchesService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [SwatchesService],
       imports: [
@@ -15,6 +15,7 @@ describe('SwatchesService', () => {
           username: 'swatches',
           password: 'swatches',
           entities: [Swatch],
+          synchronize: true,
         }),
         TypeOrmModule.forFeature([Swatch]),
       ],
@@ -25,5 +26,24 @@ describe('SwatchesService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('should update swatch', async () => {
+    const swatch = await service.create({
+      name: 'Old name',
+      price: '10',
+      image: 'foo.jpg',
+      color: '#000',
+    });
+    
+    const updatedSwatch = await service.update(swatch.id, {
+      name: 'New name',
+      price: '10',
+      image: 'foo.jpg',
+      color: '#000',
+      active: true,
+    });
+
+    expect(updatedSwatch.name).toBe('New name');
   });
 });
