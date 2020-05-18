@@ -1,13 +1,9 @@
-# Rauxa Services Engineering Code Challenge
+# Swatches Manager
 
 ## Description
 
 A Swatch Manager where the user can view all swatches from the database, view
 details of a single swatch and create new swatches.
-
-## Hosted Application
-
-http://rauxa-swatches.s3-website-us-east-1.amazonaws.com/
 
 ## Installation
 
@@ -96,6 +92,8 @@ allowing code reusability.
 
 ## Todo
 
+* Add templates to create infrastructure on the cloud
+* Improve security
 * Enable multiple images for swatches
 * Save image on S3
 * Upload 2 versions of image (large/original and thumbnail)
