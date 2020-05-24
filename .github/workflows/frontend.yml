@@ -7,23 +7,13 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [12.x]
-
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-west-2
-    - name: Install npm dependencies
+        node-version: 12.x
+    - name: Install yarn dependencies
       working-directory: frontend
       run: yarn install --frozen-lockfile
     - name: Run tests
@@ -32,5 +22,27 @@ jobs:
         # yarn test:unit
         # yarn test:e2e
         yarn build
-    - name: Deploy static site to S3 bucket
-      run: aws s3 sync ./frontend/dist/ ${{ secrets.AWS_S3_BUCKET_URL }} --delete
+
+  deploy:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install npm dependencies
+      working-directory: frontend
+      run: yarn install --frozen-lockfile
+    - name: Build application
+      working-directory: frontend
+      run: |
+        # yarn test:unit
+        # yarn test:e2e
+        yarn build
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+    # - name: Deploy static site to S3 bucket
+    #   run: aws s3 sync ./frontend/dist/ ${{ secrets.AWS_S3_BUCKET_URL }} --delete
