@@ -105,34 +105,3 @@ allowing code reusability.
 * More tests (Unit tests, improve coverage)
 * Optimize CI jobs
 * Authentication and Authorization if required
-
-## Author
-
-Caique de Castro
-
-* [Website](https://caiquecastro.com/)
-* [Github](https://github.com/caiquecastro)
-* [Gitlab](https://gitlab.com/caiquecastro)
-
-### Author Projects
-
-[Hotel Manager](https://github.com/caiquecastro/hotel-manager):
-App to manage hotels, B&B (bed and breakfast)
-
-[Research Catalog](https://github.com/caiquecastro/research-catalog):
-App to manage catalog researches. For Universities, Innovation Centres
-
-### Author Contributions on Public Repositories / Libraries
-
-* https://github.com/song940/node-escpos
-* https://github.com/laravel
-* https://github.com/Vincit/objection.js
-* https://github.com/vuex-orm/plugin-axios
-* https://github.com/knex/knex
-* https://github.com/mongoosejs/mongoose-ttl
-* https://github.com/adonisjs
-* https://github.com/apollographql
-* https://github.com/agenda/agenda
-* https://github.com/twbs/bootstrap
-* https://github.com/sequelize/sequelize
-* https://github.com/jgthms/bulma
